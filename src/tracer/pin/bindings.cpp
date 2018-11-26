@@ -247,6 +247,16 @@ namespace tracer {
     }
 
 
+    static PyObject* pintool_getPID(PyObject* self, PyObject* noarg) {
+      try {
+        return triton::bindings::python::PyLong_FromUint(tracer::pintool::getPID());
+      }
+      catch (const std::exception& e) {
+        return PyErr_Format(PyExc_TypeError, "%s", e.what());
+      }
+    }
+
+
     static PyObject* pintool_getRoutineName(PyObject* self, PyObject* addr) {
       if (!PyLong_Check(addr) && !PyInt_Check(addr))
         return PyErr_Format(PyExc_TypeError, "tracer::pintool::getImageName(): Expected an address (integer) as argument.");
@@ -574,6 +584,7 @@ namespace tracer {
       {"getCurrentMemoryValue",     pintool_getCurrentMemoryValue,      METH_VARARGS,   ""},
       {"getCurrentRegisterValue",   pintool_getCurrentRegisterValue,    METH_O,         ""},
       {"getImageName",              pintool_getImageName,               METH_O,         ""},
+      {"getPID",                    pintool_getPID,                     METH_NOARGS,    ""},
       {"getRoutineName",            pintool_getRoutineName,             METH_O,         ""},
       {"getSyscallArgument",        pintool_getSyscallArgument,         METH_VARARGS,   ""},
       {"getSyscallNumber",          pintool_getSyscallNumber,           METH_O,         ""},

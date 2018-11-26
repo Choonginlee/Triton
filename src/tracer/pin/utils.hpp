@@ -8,6 +8,7 @@
 #ifndef TRITON_UTILS_H
 #define TRITON_UTILS_H
 
+#include <unistd.h>
 #include <string>
 #include <pin.H>
 #include <triton/tritonTypes.hpp>
@@ -37,6 +38,9 @@ namespace tracer {
 
     //! Returns the image name from a given address.
     std::string getImageName(triton::__uint address);
+
+    //! Returns the PID of current running process.
+    triton::uint16 getPID(void);
 
     //! Returns the routine name from a given address.
     std::string getRoutineName(triton::__uint address);

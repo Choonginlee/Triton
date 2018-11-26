@@ -63,6 +63,10 @@ namespace tracer {
       return address - base;
     }
 
+    triton::uint16 getPID(void){
+      return (triton::uint32)getpid();
+    }
+
 
     std::string getRoutineName(triton::__uint address) {
       RTN rtn;
